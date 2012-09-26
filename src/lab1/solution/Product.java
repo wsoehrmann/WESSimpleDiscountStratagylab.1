@@ -4,45 +4,38 @@ import lab1.*;
 
 /**
  * This sample class and its sub-classes do not follow the Strategy Pattern.
- * Revise the program in the lab1.solution package to use the pattern
- * correctly. Just copy the classes from the current package to the target
- * package, and then revise.
- * 
+ * Revise the program in the lab1.solution package to use the pattern correctly.
+ * Just copy the classes from the current package to the target package, and
+ * then revise.
+ *
  * Use the word "Strategy" in your strategy pattern class.
- * 
+ *
  * @author jlombardo
  */
-
 public abstract class Product {
+
     private static final String UNDEFINED = "undefined";
-    
     private String partName;
     private String partNumber;
     private String description;
     private double price;
+    DiscountStrategy discountStrategy;
+
+    public void setDiscountStrategy(DiscountStrategy ds) {
+        discountStrategy = ds;
+    }
 
     public void setDiscount(DiscountStrategy discount) {
         this.discount = discount;
     }
     private DiscountStrategy discount;
-     
-    // put discount strategy it hear 
-    /**
-     * Sub-class authors should override this to do their bidding.
-     * Defaults to no discount (0%).
-     * 
-     * @return price * discount percent
-     */
-    
-    // put this into an interface and make this abstract
-    
 
     public final String getPartName() {
         return partName;
     }
 
     public final void setPartName(final String partName) {
-        if(partName == null || partName.length() == 0) {
+        if (partName == null || partName.length() == 0) {
             this.partName = UNDEFINED;
         }
         this.partName = partName;
@@ -53,7 +46,7 @@ public abstract class Product {
     }
 
     public void setPartNumber(final String partNumber) {
-        if(partNumber == null || partNumber.length() == 0) {
+        if (partNumber == null || partNumber.length() == 0) {
             this.partNumber = UNDEFINED;
         }
         this.partNumber = partNumber;
@@ -73,14 +66,13 @@ public abstract class Product {
     }
 
     public final void setPrice(final double price) {
-        if(price < 0) {
+        if (price < 0) {
             this.price = 0;
         }
         this.price = price;
     }
-    public double getDiscountInDollars(){
+
+    public double getDiscountInDollars() {
         return discount.getDiscountInDollars(price);
     }
-    
-    
 }
